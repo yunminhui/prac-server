@@ -34,7 +34,7 @@ const Mutation = {
   },
   signUp: async (parent, {uername, email, password}, {models}) => {
     // normalize email address
-    email = email.trin().toLowerCase();
+    email = email.trim().toLowerCase();
     // hash the password
     const hashed = await bcrypt.hash(password, 10);
     const avatar = gravatar(email);
