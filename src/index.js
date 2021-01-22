@@ -19,11 +19,25 @@ import models from './models/index';
 import typeDefs from './schema';
 import resolvers from './resolvers/index';
 
+const getUser = (token) => {
+  if (token) {
+    try {
+      return jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      throw new Error('Session invalid');
+    }
+  }
+};
+
+// Apollo Server setup
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => {
-    return {models};
+  context: ({req}) => {
+    const token = req.headers.authorization;
+    const user = getUser(token);
+    console.log(user);
+    return {models, user};
   },
 });
 

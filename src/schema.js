@@ -12,6 +12,14 @@ const typeDefs = gql`
     updatedAt: DateTime!
   }
 
+  type User {
+    id: ID!
+    username: String!
+    email: String!
+    avatar: String
+    notes: [Note!]!
+  }
+
   type Query {
     notes: [Note!]!
     note(id: ID!): Note!
