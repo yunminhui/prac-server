@@ -1,3 +1,4 @@
+// Apollo Server process GraphQL operations
 import Query from './Query';
 import Mutation from './Mutation';
 

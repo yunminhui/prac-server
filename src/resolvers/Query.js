@@ -6,6 +6,17 @@ const Query = {
   note: async (parent, args, {models}) => {
     return await models.Note.findById(args.id);
   },
+  user: async (parent, {username}, {models}) => {
+    // find a user given their username
+    return await models.User.findOne({Username});
+  },
+  users: async (parent, {username}, {models}) => {
+    return await models.User.find({});
+  },
+  me: async (parent, args, {models, user}) => {
+    // find a user given the current user context
+    return await models.User.findById(user.id);
+  },
 };
 
 export default Query;
